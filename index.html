@@ -516,7 +516,8 @@
 
             // Codifica il corpo dell'email per il link mailto
             const encodedBody = encodeURIComponent(emailBody);
-            const emailSubject = encodeURIComponent("Richiesta Preventivo Noleggio da Modulo Web");
+            // Oggetto predefinito della mail
+            const emailSubject = encodeURIComponent("Richiesta preventivo noleggio");
             const recipientEmail = "noleggio@runner.it"; // Indirizzo email destinatario
 
             // Costruisci il link mailto
