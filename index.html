@@ -310,19 +310,6 @@
             outline: none;
             box-shadow: 0 0 0 4px rgba(0, 50, 86, 0.5); /* focus:ring-4 focus:ring-[var(--runner-blue-dark)] focus:ring-opacity-50 */
         }
-        /* Success message style */
-        .success-message {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-            border-radius: 8px;
-            text-align: center;
-            font-size: 1.1rem;
-            font-weight: 500;
-            display: none; /* Hidden by default */
-        }
     </style>
 </head>
 <body class="p-4">
@@ -335,12 +322,7 @@
             <p>Compila i campi per ottenere una quotazione accurata.</p>
         </div>
 
-        <!-- IMPORTANT:
-             You MUST replace "YOUR_FORMSPREE_FORM_ID" with the actual Formspree form ID.
-             Example: <form id="rentalForm" class="space-y-8" method="POST" action="https://formspree.io/f/yourformid">
-        -->
-        <form id="rentalForm" class="space-y-8" method="POST" action="https://formspree.io/f/YOUR_FORMSPREE_FORM_ID">
-
+        <form id="rentalForm" class="space-y-8">
             <!-- 1. Beni ad uso interno -->
             <div class="form-section">
                 <div class="section-title">1. Beni ad uso interno?</div>
@@ -480,9 +462,6 @@
                 </button>
             </div>
         </form>
-        <div id="successMessage" class="success-message">
-            Richiesta inviata con successo! Ti contatteremo a breve.
-        </div>
     </div>
 
     <script>
@@ -511,38 +490,44 @@
         // Inizializza lo stato dei campi utente al caricamento della pagina
         document.addEventListener('DOMContentLoaded', toggleUserFields);
 
-        // Gestore dell'invio del modulo per inviare i dati all'endpoint server-side (Formspree)
-        document.getElementById('rentalForm').addEventListener('submit', async function(event) {
+        // Gestore dell'invio del modulo per inviare i dati via mailto
+        document.getElementById('rentalForm').addEventListener('submit', function(event) {
             event.preventDefault(); // Previene l'invio predefinito del modulo
 
-            const form = event.target;
-            const successMessage = document.getElementById('successMessage');
-
-            try {
-                // Invia il modulo direttamente all'URL specificato nell'attributo 'action'
-                const response = await fetch(form.action, {
-                    method: form.method,
-                    body: new FormData(form), // FormData invia i dati come form-urlencoded
-                    // Non impostare Content-Type, il browser lo farà automaticamente per FormData
-                });
-
-                if (response.ok) {
-                    // Successo: Modulo inviato a Formspree
-                    form.style.display = 'none'; // Nascondi il modulo
-                    successMessage.style.display = 'block'; // Mostra il messaggio di successo
-                } else {
-                    // Errore: Gestisci la risposta del server (es. Formspree ha rifiutato l'invio)
-                    console.error('Invio del modulo fallito:', response.statusText);
-                    alert('Si è verificato un errore durante l\'invio. Riprova più tardi.');
-                    form.style.display = 'block'; // Mostra di nuovo il modulo in caso di errore
-                    successMessage.style.display = 'none'; // Nascondi il messaggio di successo
-                }
-            } catch (error) {
-                console.error('Errore di rete durante l\'invio del modulo:', error);
-                alert('Si è verificato un errore di rete. Controlla la tua connessione e riprova.');
-                form.style.display = 'block'; // Mostra di nuovo il modulo in caso di errore
-                successMessage.style.display = 'none'; // Nascondi il messaggio di successo
+            const formData = new FormData(this);
+            const data = {};
+            for (let [key, value] of formData.entries()) {
+                data[key] = value;
             }
+
+            // Formatta i dati per il corpo dell'email
+            let emailBody = "Dettagli Richiesta Preventivo Noleggio:\n\n";
+            emailBody += "1. Beni ad uso interno: " + (data.internalUse || 'N/D') + "\n";
+            if (data.internalUse === 'No') {
+                emailBody += "   Ragione Sociale dell'utilizzatore: " + (data.ragioneSociale || 'N/D') + "\n";
+                emailBody += "   Partita IVA dell'utilizzatore: " + (data.partitaIVA || 'N/D') + "\n";
+            }
+            emailBody += "\n2. Codici e Valore dei beni (inclusa marginalità cliente):\n" + (data.itemCodesValue || 'N/D') + "\n";
+            emailBody += "\n3. Valore totale merce: " + (data.totalGoodsValue || 'N/D') + " €\n";
+            emailBody += "\n4. Periodicità: " + (data.periodicity || 'N/D') + "\n";
+            emailBody += "5. Durata: " + (data.duration || 'N/D') + " mesi\n";
+            emailBody += "6. Valore di Riacquisto (VR): " + (data.resaleValue || 'N/D') + "\n";
+            emailBody += "7. Delega Pagamento: " + (data.paymentDelegation || 'N/D') + "\n";
+
+            // Codifica il corpo dell'email per il link mailto
+            const encodedBody = encodeURIComponent(emailBody);
+            const emailSubject = encodeURIComponent("Richiesta Preventivo Noleggio da Modulo Web");
+            const recipientEmail = "noleggio@runner.it"; // Indirizzo email destinatario
+
+            // Costruisci il link mailto
+            const mailtoLink = `mailto:${recipientEmail}?subject=${emailSubject}&body=${encodedBody}`;
+
+            // Apri il link mailto
+            window.location.href = mailtoLink;
+
+            // Nota: Non è possibile mostrare un messaggio di successo sulla pagina
+            // perché l'utente viene reindirizzato al client di posta.
+            // Considera le limitazioni di mailto per un uso professionale.
         });
     </script>
 </body>
