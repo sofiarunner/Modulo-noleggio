@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modulo Richiesta Preventivo Noleggio</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         /* Define custom colors based on the logo */
@@ -18,92 +17,120 @@
             --runner-blue-gradient-end: #004a7a; /* Slightly lighter dark blue for gradient end */
         }
 
-        /* Custom styles for a more polished look */
+        /* Base Body Styles */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #e2e8f0; /* Light blue-gray background */
+            margin: 0;
+            padding: 20px; /* Add some padding for smaller screens */
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh; /* Ensure it takes full viewport height */
-            padding: 1rem; /* Add some padding for smaller screens */
-        }
-        .form-container {
-            background-color: #ffffff;
-            border-radius: 1.5rem; /* More rounded corners */
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* Deeper shadow */
-            padding: 2.5rem; /* More padding */
-            border: 1px solid #e5e7eb; /* Subtle border */
-        }
-        .info-icon {
-            cursor: help;
-            position: relative;
-            display: inline-flex; /* Use flex for better alignment */
-            align-items: center;
-            justify-content: center;
-            width: 20px; /* Make icon clickable area slightly larger */
-            height: 20px;
-            border-radius: 50%; /* Circular icon */
-            background-color: var(--runner-blue-light); /* Light blue background for icon */
-            color: var(--runner-blue-medium); /* Darker blue text for icon */
-            font-weight: 700;
-            font-size: 0.75rem; /* Smaller, more refined 'i' */
-            transition: background-color 0.2s ease-in-out;
-        }
-        .info-icon:hover {
-            background-color: var(--runner-blue-medium); /* Darker blue on hover */
-            color: #fff;
-        }
-        .info-tooltip {
-            visibility: hidden;
-            background-color: var(--runner-blue-dark); /* Darker background for tooltip */
-            color: #fff;
-            text-align: center;
-            border-radius: 0.5rem; /* Slightly more rounded tooltip */
-            padding: 0.6rem 1rem;
-            position: absolute;
-            z-index: 10;
-            bottom: 125%;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0;
-            transition: opacity 0.3s, transform 0.3s; /* Smooth transition */
-            width: 280px; /* Slightly wider tooltip */
-            font-size: 0.875rem;
-            line-height: 1.4;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for tooltip */
-        }
-        .info-icon:hover .info-tooltip {
-            visibility: visible;
-            opacity: 1;
-            transform: translateX(-50%) translateY(-5px); /* Slight lift on hover */
-        }
-        /* Arrow for tooltip */
-        .info-tooltip::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -8px; /* Adjust arrow position */
-            border-width: 8px; /* Larger arrow */
-            border-style: solid;
-            border-color: var(--runner-blue-dark) transparent transparent transparent;
+            box-sizing: border-box; /* Include padding in element's total width and height */
         }
 
-        /* Custom radio button styling */
+        /* Form Container Styles */
+        .form-container {
+            background-color: #ffffff;
+            border-radius: 24px; /* 1.5rem */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* Deeper shadow */
+            padding: 40px; /* 2.5rem */
+            border: 1px solid #e5e7eb; /* Subtle border */
+            max-width: 768px; /* max-w-4xl */
+            width: 100%;
+            box-sizing: border-box;
+            text-align: left !important; /* Force all text inside to align left */
+        }
+
+        /* Header Section Styles */
+        .header-section {
+            text-align: center !important;
+            margin-bottom: 40px; /* mb-10 */
+        }
+        .header-section h1 {
+            font-size: 36px; /* text-4xl */
+            font-weight: 800; /* font-extrabold */
+            color: #1f2937; /* gray-800 */
+            margin-top: 0;
+            margin-bottom: 8px; /* mb-2 */
+            text-align: center !important;
+        }
+        .header-section p {
+            color: #6b7280; /* gray-500 */
+            margin-top: 8px; /* mt-2 */
+            font-size: 18px; /* text-lg */
+            text-align: center !important;
+        }
+        .header-section img {
+            margin: 0 auto 16px auto; /* Centered logo horizontally */
+            height: 80px; /* h-20 */
+            object-fit: contain;
+            max-width: 100%; /* Ensure image scales down */
+            display: block; /* Ensure it behaves as a block for margin */
+        }
+
+        /* Form Section Styles */
+        .form-section {
+            background-color: #f9fafb; /* gray-50 */
+            padding: 24px; /* p-6 */
+            border-radius: 12px; /* rounded-xl */
+            border: 1px solid #e5e7eb; /* border border-gray-200 */
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+            margin-bottom: 32px; /* space-y-8 between sections */
+            text-align: left !important; /* Force all text inside to align left */
+        }
+
+        .form-section:last-of-type {
+            margin-bottom: 0; /* Remove margin for the last section */
+        }
+
+        /* Section Title Styles (for the new div structure) */
+        .section-title {
+            font-size: 20px; /* text-xl */
+            font-weight: 600; /* font-semibold */
+            color: #1f2937; /* gray-800 */
+            margin-bottom: 16px; /* mb-4 */
+            display: block; /* Ensure it's a block element */
+            text-align: left !important;
+        }
+
+        /* Radio Button Group Styles */
+        .radio-group {
+            display: flex;
+            flex-direction: column; /* flex-col */
+            gap: 12px; /* space-y-3 */
+        }
+        @media (min-width: 640px) { /* sm breakpoint */
+            .radio-group {
+                flex-direction: row; /* sm:flex-row */
+                gap: 32px; /* sm:space-x-8 */
+            }
+        }
+
+        .radio-group label {
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+            text-align: left !important;
+        }
+
+        /* Custom Radio Button Styling */
         input[type="radio"].form-radio {
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
             display: inline-block;
             position: relative;
-            width: 1.25rem; /* 20px */
-            height: 1.25rem; /* 20px */
+            width: 20px; /* 1.25rem */
+            height: 20px; /* 1.25rem */
             border-radius: 50%;
             border: 2px solid #cbd5e1; /* Light gray border */
             outline: none;
             cursor: pointer;
             transition: border-color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+            vertical-align: middle; /* Align with text */
+            flex-shrink: 0; /* Prevent shrinking on small screens */
         }
         input[type="radio"].form-radio:checked {
             border-color: var(--runner-blue-dark); /* Blue border when checked */
@@ -112,8 +139,8 @@
         input[type="radio"].form-radio:checked::before {
             content: '';
             display: block;
-            width: 0.5rem; /* 8px */
-            height: 0.5rem; /* 8px */
+            width: 8px; /* 0.5rem */
+            height: 8px; /* 0.5rem */
             background-color: #fff; /* White dot */
             border-radius: 50%;
             position: absolute;
@@ -124,176 +151,342 @@
         input[type="radio"].form-radio:focus {
             box-shadow: 0 0 0 3px rgba(0, 50, 86, 0.5); /* Blue focus ring using runner-blue-dark */
         }
-
-        /* Input field focus style */
-        input[type="text"]:focus,
-        textarea:focus {
-            border-color: var(--runner-blue-dark); /* Blue border on focus */
-            box-shadow: 0 0 0 3px rgba(0, 50, 86, 0.2); /* Soft blue glow on focus */
+        .radio-group label span {
+            margin-left: 12px; /* ml-3 */
+            font-size: 18px; /* text-lg */
+            color: #4b5563; /* gray-700 */
+            transition: color 0.2s ease-in-out;
+            vertical-align: middle; /* Explicitly ensure vertical alignment */
+            text-align: left !important;
+        }
+        .radio-group label:hover span {
+            color: var(--runner-blue-dark); /* group-hover:text-[var(--runner-blue-dark)] */
         }
 
-        /* Custom button styling for gradient */
+        /* Conditional Fields Styles */
+        .user-fields {
+            margin-top: 24px; /* mt-6 */
+            display: none; /* hidden by default */
+            flex-direction: column;
+            gap: 20px; /* space-y-5 */
+        }
+        .user-fields label {
+            font-size: 16px; /* text-base */
+            font-weight: 500; /* font-medium */
+            color: #4b5563; /* gray-700 */
+            margin-bottom: 8px; /* mb-2 */
+            text-align: left !important;
+        }
+        .user-fields input[type="text"] {
+            width: 100%; /* w-full */
+            padding: 12px 20px; /* px-5 py-3 */
+            border: 1px solid #d1d5db; /* border border-gray-300 */
+            border-radius: 8px; /* rounded-lg */
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+            font-size: 16px; /* text-base */
+            box-sizing: border-box;
+            text-align: left !important;
+        }
+        .user-fields input[type="text"]:focus {
+            border-color: var(--runner-blue-dark); /* Blue border on focus */
+            box-shadow: 0 0 0 3px rgba(0, 50, 86, 0.2); /* Soft blue glow on focus */
+            outline: none;
+        }
+
+        /* Textarea and Number Input Styles */
+        textarea, input[type="number"] {
+            width: 100%; /* w-full */
+            padding: 12px 20px; /* px-5 py-3 */
+            border: 1px solid #d1d5db; /* border border-gray-300 */
+            border-radius: 8px; /* rounded-lg */
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+            font-size: 16px; /* text-base */
+            box-sizing: border-box;
+            margin-top: 4px; /* mt-1 */
+            text-align: left !important;
+        }
+        textarea:focus, input[type="number"]:focus {
+            border-color: var(--runner-blue-dark); /* Blue border on focus */
+            box-shadow: 0 0 0 3px rgba(0, 50, 86, 0.2); /* Soft blue glow on focus */
+            outline: none;
+        }
+
+        /* Info Icon and Tooltip Styles */
+        .info-icon {
+            cursor: help;
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--runner-blue-light);
+            color: var(--runner-blue-medium);
+            font-weight: 700;
+            font-size: 12px; /* 0.75rem */
+            transition: background-color 0.2s ease-in-out;
+            margin-left: 12px; /* ml-3 */
+            vertical-align: middle; /* Align with text */
+        }
+        .info-icon:hover {
+            background-color: var(--runner-blue-medium);
+            color: #fff;
+        }
+        .info-tooltip {
+            visibility: hidden;
+            background-color: var(--runner-blue-dark);
+            color: #fff;
+            text-align: left !important;
+            border-radius: 8px; /* 0.5rem */
+            padding: 10px 16px; /* 0.6rem 1rem */
+            position: absolute;
+            z-index: 10;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            width: 280px;
+            font-size: 14px; /* 0.875rem */
+            line-height: 1.4;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .info-icon:hover .info-tooltip {
+            visibility: visible;
+            opacity: 1;
+            transform: translateX(-50%) translateY(-5px);
+        }
+        .info-tooltip::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -8px;
+            border-width: 8px;
+            border-style: solid;
+            border-color: var(--runner-blue-dark) transparent transparent transparent;
+        }
+
+        /* Grid for Duration Radios */
+        .duration-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* grid-cols-2 */
+            gap: 16px; /* gap-4 */
+        }
+        @media (min-width: 640px) { /* sm breakpoint */
+            .duration-grid {
+                grid-template-columns: repeat(3, 1fr); /* sm:grid-cols-3 */
+            }
+        }
+        @media (min-width: 768px) { /* md breakpoint */
+            .duration-grid {
+                grid-template-columns: repeat(5, 1fr); /* md:grid-cols-5 */
+            }
+        }
+
+        /* Submit Button Styles */
+        .submit-button-wrapper {
+            padding-top: 32px; /* pt-8 */
+        }
         .btn-primary-gradient {
+            width: 100%; /* w-full */
             background-image: linear-gradient(to right, var(--runner-blue-gradient-start), var(--runner-blue-gradient-end));
+            color: #ffffff;
+            font-weight: 700; /* font-bold */
+            padding: 16px 24px; /* py-4 px-6 */
+            border-radius: 12px; /* rounded-xl */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+            transition: all 0.3s ease-in-out; /* transition duration-300 ease-in-out */
+            font-size: 20px; /* text-xl */
+            border: none; /* Remove default button border */
+            cursor: pointer;
         }
         .btn-primary-gradient:hover {
             background-image: linear-gradient(to right, var(--runner-blue-hover), var(--runner-blue-dark));
+            transform: scale(1.02); /* hover:scale-105 (adjusted slightly for subtle effect) */
+        }
+        .btn-primary-gradient:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(0, 50, 86, 0.5); /* focus:ring-4 focus:ring-[var(--runner-blue-dark)] focus:ring-opacity-50 */
+        }
+        /* Success message style */
+        .success-message {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 500;
+            display: none; /* Hidden by default */
         }
     </style>
 </head>
 <body class="p-4">
-    <div class="max-w-4xl w-full form-container">
-        <!-- Header Section with Runner Logo -->
-        <div class="text-center mb-10">
-            <img src="Logo Runner BLU_R.png" alt="Logo Runner" class="mx-auto mb-4 h-20 object-contain" onerror="this.onerror=null; this.src='https://placehold.co/300x80/ffffff/003256?text=Logo%20Runner';">
-            <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-800">Modulo Richiesta Preventivo Noleggio</h1>
-            <p class="text-gray-500 mt-2 text-lg">Compila i campi per ottenere una quotazione accurata.</p>
+    <div class="form-container">
+        <!-- Header Section -->
+        <div class="header-section">
+            <!-- Logo -->
+            <img src="Logo Runner BLU_R.png" alt="Logo Runner" onerror="this.onerror=null; this.src='https://placehold.co/300x80/ffffff/003256?text=Logo%20Runner';">
+            <h1>Modulo Richiesta Preventivo Noleggio</h1>
+            <p>Compila i campi per ottenere una quotazione accurata.</p>
         </div>
 
-        <form id="rentalForm" class="space-y-8">
+        <!-- IMPORTANT:
+             You MUST replace "YOUR_FORMSPREE_FORM_ID" with the actual Formspree form ID.
+             Example: <form id="rentalForm" class="space-y-8" method="POST" action="https://formspree.io/f/yourformid">
+        -->
+        <form id="rentalForm" class="space-y-8" method="POST" action="https://formspree.io/f/YOUR_FORMSPREE_FORM_ID">
+
             <!-- 1. Beni ad uso interno -->
-            <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 shadow-sm">
-                <label class="block text-xl font-semibold text-gray-800 mb-4">1. Beni ad uso interno?</label>
-                <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-8">
-                    <label class="inline-flex items-center group">
+            <div class="form-section">
+                <div class="section-title">1. Beni ad uso interno?</div>
+                <div class="radio-group">
+                    <label>
                         <input type="radio" name="internalUse" value="Sì" class="form-radio" checked onchange="toggleUserFields()">
-                        <span class="ml-3 text-lg text-gray-700 group-hover:text-[var(--runner-blue-dark)] transition-colors duration-200">Sì</span>
+                        <span>Sì</span>
                     </label>
-                    <label class="inline-flex items-center group">
+                    <label>
                         <input type="radio" name="internalUse" value="No" class="form-radio" onchange="toggleUserFields()">
-                        <span class="ml-3 text-lg text-gray-700 group-hover:text-[var(--runner-blue-dark)] transition-colors duration-200">No</span>
+                        <span>No</span>
                     </label>
                 </div>
 
                 <!-- Conditional fields for "No" -->
-                <div id="userFields" class="mt-6 space-y-5 hidden">
+                <div id="userFields" class="user-fields">
                     <div>
-                        <label for="ragioneSociale" class="block text-base font-medium text-gray-700 mb-2">Ragione Sociale dell'utilizzatore</label>
-                        <input type="text" id="ragioneSociale" name="ragioneSociale" class="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-[var(--runner-blue-dark)] focus:border-[var(--runner-blue-dark)] text-base" placeholder="Es. Azienda S.p.A.">
+                        <label for="ragioneSociale">Ragione Sociale dell'utilizzatore</label>
+                        <input type="text" id="ragioneSociale" name="ragioneSociale" placeholder="Es. Azienda S.p.A.">
                     </div>
                     <div>
-                        <label for="partitaIVA" class="block text-base font-medium text-gray-700 mb-2">Partita IVA dell'utilizzatore</label>
-                        <input type="text" id="partitaIVA" name="partitaIVA" class="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-[var(--runner-blue-dark)] focus:border-[var(--runner-blue-dark)] text-base" placeholder="Es. 12345678901">
+                        <label for="partitaIVA">Partita IVA dell'utilizzatore</label>
+                        <input type="text" id="partitaIVA" name="partitaIVA" placeholder="Es. 12345678901">
                     </div>
                 </div>
             </div>
 
             <!-- 2. Codici e Valore dei beni -->
-            <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 shadow-sm">
-                <label for="itemCodesValue" class="block text-xl font-semibold text-gray-800 mb-4">
+            <div class="form-section">
+                <div class="section-title">
                     2. Codici e Valore dei beni
-                    <span class="info-icon ml-3">ⓘ
+                    <span class="info-icon">ⓘ
                         <span class="info-tooltip">Lista con i codici da noleggiare e il valore INCLUDENDO LA MARGINALITÀ DEL CLIENTE.</span>
                     </span>
-                </label>
-                <textarea id="itemCodesValue" name="itemCodesValue" rows="6" class="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-[var(--runner-blue-dark)] focus:border-[var(--runner-blue-dark)] text-base" placeholder="Es.&#10;Codice: ABC123 - Valore: 1.500 €&#10;Codice: DEF456 - Valore: 2.000 €&#10;Codice: GHI789 - Valore: 3.200 €"></textarea>
+                </div>
+                <textarea id="itemCodesValue" name="itemCodesValue" rows="6" placeholder="Es.&#10;Codice: ABC123 - Valore: 1.500 €&#10;Codice: DEF456 - Valore: 2.000 €&#10;Codice: GHI789 - Valore: 3.200 €"></textarea>
             </div>
 
             <!-- Nuovo campo: 3. Valore totale merce -->
-            <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 shadow-sm">
-                <label for="totalGoodsValue" class="block text-xl font-semibold text-gray-800 mb-4">
+            <div class="form-section">
+                <div class="section-title">
                     3. Valore totale merce
-                </label>
-                <input type="number" id="totalGoodsValue" name="totalGoodsValue" class="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-[var(--runner-blue-dark)] focus:border-[var(--runner-blue-dark)] text-base" placeholder="Es. 10000.00" step="0.01">
+                </div>
+                <input type="number" id="totalGoodsValue" name="totalGoodsValue" placeholder="Es. 10000.00" step="0.01">
             </div>
 
             <!-- 4. Periodicità (ex 3.) -->
-            <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 shadow-sm">
-                <label class="block text-xl font-semibold text-gray-800 mb-4">4. Periodicità</label>
-                <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-8">
-                    <label class="inline-flex items-center group">
+            <div class="form-section">
+                <div class="section-title">4. Periodicità</div>
+                <div class="radio-group">
+                    <label>
                         <input type="radio" name="periodicity" value="Mensile" class="form-radio" checked>
-                        <span class="ml-3 text-lg text-gray-700 group-hover:text-[var(--runner-blue-dark)] transition-colors duration-200">Mensile</span>
+                        <span>Mensile</span>
                     </label>
-                    <label class="inline-flex items-center group">
+                    <label>
                         <input type="radio" name="periodicity" value="Trimestrale" class="form-radio">
-                        <span class="ml-3 text-lg text-gray-700 group-hover:text-[var(--runner-blue-dark)] transition-colors duration-200">Trimestrale</span>
+                        <span>Trimestrale</span>
                     </label>
                 </div>
             </div>
 
             <!-- 5. Durata (ex 4.) -->
-            <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 shadow-sm">
-                <label class="block text-xl font-semibold text-gray-800 mb-4">5. Durata (in mesi)</label>
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-                    <label class="inline-flex items-center group">
+            <div class="form-section">
+                <div class="section-title">5. Durata (in mesi)</div>
+                <div class="duration-grid">
+                    <label>
                         <input type="radio" name="duration" value="24" class="form-radio" checked>
-                        <span class="ml-3 text-lg text-gray-700 group-hover:text-[var(--runner-blue-dark)] transition-colors duration-200">24</span>
+                        <span>24</span>
                     </label>
-                    <label class="inline-flex items-center group">
+                    <label>
                         <input type="radio" name="duration" value="36" class="form-radio">
-                        <span class="ml-3 text-lg text-gray-700 group-hover:text-[var(--runner-blue-dark)] transition-colors duration-200">36</span>
+                        <span>36</span>
                     </label>
-                    <label class="inline-flex items-center group">
+                    <label>
                         <input type="radio" name="duration" value="48" class="form-radio">
-                        <span class="ml-3 text-lg text-gray-700 group-hover:text-[var(--runner-blue-dark)] transition-colors duration-200">48</span>
+                        <span>48</span>
                     </label>
-                    <label class="inline-flex items-center group">
+                    <label>
                         <input type="radio" name="duration" value="60" class="form-radio">
-                        <span class="ml-3 text-lg text-gray-700 group-hover:text-[var(--runner-blue-dark)] transition-colors duration-200">60</span>
+                        <span>60</span>
                     </label>
-                    <label class="inline-flex items-center group">
+                    <label>
                         <input type="radio" name="duration" value="72" class="form-radio">
-                        <span class="ml-3 text-lg text-gray-700 group-hover:text-[var(--runner-blue-dark)] transition-colors duration-200">72</span>
+                        <span>72</span>
                     </label>
                 </div>
             </div>
 
             <!-- 6. Valore di Riacquisto (VR) (ex 5.) -->
-            <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 shadow-sm">
-                <label class="block text-xl font-semibold text-gray-800 mb-4">
+            <div class="form-section">
+                <div class="section-title">
                     6. Valore di Riacquisto (VR)
-                    <span class="info-icon ml-3">ⓘ
+                    <span class="info-icon">ⓘ
                         <span class="info-tooltip">Al termine del noleggio potrai decidere se acquistare i beni al valore percentuale scelto. Non è un obbligo.</span>
                     </span>
-                </label>
-                <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-8">
-                    <label class="inline-flex items-center group">
+                </div>
+                <div class="radio-group">
+                    <label>
                         <input type="radio" name="resaleValue" value="1%" class="form-radio" checked>
-                        <span class="ml-3 text-lg text-gray-700 group-hover:text-[var(--runner-blue-dark)] transition-colors duration-200">1%</span>
+                        <span>1%</span>
                     </label>
-                    <label class="inline-flex items-center group">
+                    <label>
                         <input type="radio" name="resaleValue" value="3%" class="form-radio">
-                        <span class="ml-3 text-lg text-gray-700 group-hover:text-[var(--runner-blue-dark)] transition-colors duration-200">3%</span>
+                        <span>3%</span>
                     </label>
-                    <label class="inline-flex items-center group">
+                    <label>
                         <input type="radio" name="resaleValue" value="5%" class="form-radio">
-                        <span class="ml-3 text-lg text-gray-700 group-hover:text-[var(--runner-blue-dark)] transition-colors duration-200">5%</span>
+                        <span>5%</span>
                     </label>
                 </div>
             </div>
 
             <!-- 7. Delega Pagamento (ex 6.) -->
-            <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 shadow-sm">
-                <label class="block text-xl font-semibold text-gray-800 mb-4">
+            <div class="form-section">
+                <div class="section-title">
                     7. Delega Pagamento
-                    <span class="info-icon ml-3">ⓘ
+                    <span class="info-icon">ⓘ
                         <span class="info-tooltip">Se selezioni 'Sì', il pagamento dei beni acquistati da Runner verrà effettuato direttamente da DLL, solo per la parte di competenza di Runner.</span>
                     </span>
-                </label>
-                <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-8">
-                    <label class="inline-flex items-center group">
+                </div>
+                <div class="radio-group">
+                    <label>
                         <input type="radio" name="paymentDelegation" value="Sì" class="form-radio" checked>
-                        <span class="ml-3 text-lg text-gray-700 group-hover:text-[var(--runner-blue-dark)] transition-colors duration-200">Sì</span>
+                        <span>Sì</span>
                     </label>
-                    <label class="inline-flex items-center group">
+                    <label>
                         <input type="radio" name="paymentDelegation" value="No" class="form-radio">
-                        <span class="ml-3 text-lg text-gray-700 group-hover:text-[var(--runner-blue-dark)] transition-colors duration-200">No</span>
+                        <span>No</span>
                     </label>
                 </div>
             </div>
 
             <!-- Submit Button -->
-            <div class="pt-8">
-                <button type="submit" class="w-full btn-primary-gradient text-white font-bold py-4 px-6 rounded-xl shadow-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-[var(--runner-blue-dark)] focus:ring-opacity-50 text-xl">
+            <div class="submit-button-wrapper">
+                <button type="submit" class="btn-primary-gradient">
                     Invia Richiesta Preventivo
                 </button>
             </div>
         </form>
+        <div id="successMessage" class="success-message">
+            Richiesta inviata con successo! Ti contatteremo a breve.
+        </div>
     </div>
 
     <script>
-        // Function to toggle visibility of user fields based on "Beni ad uso interno" selection
+        // Funzione per mostrare/nascondere i campi utente in base alla selezione "Beni ad uso interno"
         function toggleUserFields() {
             const internalUseRadios = document.querySelectorAll('input[name="internalUse"]');
             const userFieldsDiv = document.getElementById('userFields');
@@ -306,55 +499,50 @@
             });
 
             if (isInternalUse) {
-                userFieldsDiv.classList.add('hidden');
-                // Clear values when hidden
+                userFieldsDiv.style.display = 'none';
+                // Pulisci i valori quando i campi sono nascosti
                 document.getElementById('ragioneSociale').value = '';
                 document.getElementById('partitaIVA').value = '';
             } else {
-                userFieldsDiv.classList.remove('hidden');
+                userFieldsDiv.style.display = 'flex';
             }
         }
 
-        // Initialize the state of user fields on page load
+        // Inizializza lo stato dei campi utente al caricamento della pagina
         document.addEventListener('DOMContentLoaded', toggleUserFields);
 
-        // Form submission handler to send email
-        document.getElementById('rentalForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission
+        // Gestore dell'invio del modulo per inviare i dati all'endpoint server-side (Formspree)
+        document.getElementById('rentalForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Previene l'invio predefinito del modulo
 
-            const formData = new FormData(this);
-            const data = {};
-            for (let [key, value] of formData.entries()) {
-                data[key] = value;
+            const form = event.target;
+            const successMessage = document.getElementById('successMessage');
+
+            try {
+                // Invia il modulo direttamente all'URL specificato nell'attributo 'action'
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: new FormData(form), // FormData invia i dati come form-urlencoded
+                    // Non impostare Content-Type, il browser lo farà automaticamente per FormData
+                });
+
+                if (response.ok) {
+                    // Successo: Modulo inviato a Formspree
+                    form.style.display = 'none'; // Nascondi il modulo
+                    successMessage.style.display = 'block'; // Mostra il messaggio di successo
+                } else {
+                    // Errore: Gestisci la risposta del server (es. Formspree ha rifiutato l'invio)
+                    console.error('Invio del modulo fallito:', response.statusText);
+                    alert('Si è verificato un errore durante l\'invio. Riprova più tardi.');
+                    form.style.display = 'block'; // Mostra di nuovo il modulo in caso di errore
+                    successMessage.style.display = 'none'; // Nascondi il messaggio di successo
+                }
+            } catch (error) {
+                console.error('Errore di rete durante l\'invio del modulo:', error);
+                alert('Si è verificato un errore di rete. Controlla la tua connessione e riprova.');
+                form.style.display = 'block'; // Mostra di nuovo il modulo in caso di errore
+                successMessage.style.display = 'none'; // Nascondi il messaggio di successo
             }
-
-            // Format the data for the email body
-            let emailBody = "Dettagli Richiesta Preventivo Noleggio:\n\n";
-            emailBody += "1. Beni ad uso interno: " + (data.internalUse || 'N/D') + "\n";
-            if (data.internalUse === 'No') {
-                emailBody += "   Ragione Sociale dell'utilizzatore: " + (data.ragioneSociale || 'N/D') + "\n";
-                emailBody += "   Partita IVA dell'utilizzatore: " + (data.partitaIVA || 'N/D') + "\n";
-            }
-            emailBody += "\n2. Codici e Valore dei beni (inclusa marginalità cliente):\n" + (data.itemCodesValue || 'N/D') + "\n";
-            emailBody += "\n3. Valore totale merce: " + (data.totalGoodsValue || 'N/D') + " €\n"; // Added new field
-            emailBody += "\n4. Periodicità: " + (data.periodicity || 'N/D') + "\n";
-            emailBody += "5. Durata: " + (data.duration || 'N/D') + " mesi\n";
-            emailBody += "6. Valore di Riacquisto (VR): " + (data.resaleValue || 'N/D') + "\n";
-            emailBody += "7. Delega Pagamento: " + (data.paymentDelegation || 'N/D') + "\n";
-
-            // Encode the email body for the mailto link
-            const encodedBody = encodeURIComponent(emailBody);
-            const emailSubject = encodeURIComponent("Richiesta Preventivo Noleggio da Modulo Web");
-            const recipientEmail = "noleggio@runner.it"; // Indirizzo email aggiornato
-
-            // Construct the mailto link
-            const mailtoLink = `mailto:${recipientEmail}?subject=${emailSubject}&body=${encodedBody}`;
-
-            // Open the mailto link
-            window.location.href = mailtoLink;
-
-            // Optionally, show a message to the user
-            alert("Il tuo client di posta si aprirà con i dettagli del preventivo. Clicca 'Invia' per completare.");
         });
     </script>
 </body>
